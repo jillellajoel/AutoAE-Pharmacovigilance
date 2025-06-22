@@ -2,15 +2,16 @@ import spacy
 import pandas as pd
 import os
 
-# ✅ Streamlit-safe model install (user-level, avoids permission issues)
 def get_spacy_model():
     try:
+        # Try loading from installed package
         return spacy.load("en_core_web_sm")
-    except OSError:
-        os.system("python -m spacy download en_core_web_sm")
-        return spacy.load("en_core_web_sm")
+    except:
+        # Fallback: Load from local path if not installed system-wide
+        return spacy.load(os.path.join("models", "en_core_web_sm"))
 
 nlp = get_spacy_model()
+
 
 
 # Keyword lists
