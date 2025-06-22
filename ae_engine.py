@@ -9,6 +9,7 @@ except OSError:
     download("en_core_web_sm")
     nlp = spacy.load("en_core_web_sm")
 
+
 # Keyword lists
 DRUG_KEYWORDS = ["paracetamol", "ibuprofen", "aspirin", "ranitidine", "metformin"]
 AE_KEYWORDS = ["nausea", "vomiting", "rash", "cancer", "headache", "hepatotoxicity", "renal failure"]
