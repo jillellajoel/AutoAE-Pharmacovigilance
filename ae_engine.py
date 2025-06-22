@@ -1,8 +1,15 @@
 import spacy
 import pandas as pd
 
-nlp = spacy.load("en_core_web_sm")
+# Automatically download spaCy model if not found
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    from spacy.cli import download
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
+# Keyword lists
 DRUG_KEYWORDS = ["paracetamol", "ibuprofen", "aspirin", "ranitidine", "metformin"]
 AE_KEYWORDS = ["nausea", "vomiting", "rash", "cancer", "headache", "hepatotoxicity", "renal failure"]
 SERIOUSNESS_KEYWORDS = ["hospitalized", "death", "disability", "life-threatening"]
