@@ -1,13 +1,16 @@
 import spacy
 import pandas as pd
+import os
 
-# Automatically download spaCy model if not found
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    from spacy.cli import download
-    download("en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
+# ✅ Streamlit-safe model install (user-level, avoids permission issues)
+def get_spacy_model():
+    try:
+        return spacy.load("en_core_web_sm")
+    except OSError:
+        os.system("python -m spacy download en_core_web_sm")
+        return spacy.load("en_core_web_sm")
+
+nlp = get_spacy_model()
 
 
 # Keyword lists
